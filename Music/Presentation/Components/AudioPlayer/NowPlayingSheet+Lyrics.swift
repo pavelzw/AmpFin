@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: Container
 
+#if !os(macOS)
 extension NowPlayingSheet {
     struct LyricsContainer: View {
         let track: Track
@@ -160,3 +161,4 @@ extension NowPlayingSheet {
         }
     }
 }
+#endif

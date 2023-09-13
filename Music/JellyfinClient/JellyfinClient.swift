@@ -6,7 +6,9 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
 class JellyfinClient {
     private(set) var serverUrl: URL!
@@ -14,7 +16,11 @@ class JellyfinClient {
     private(set) var userId: String!
     
     private(set) var clientVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
+    #if canImport(UIKit)
     private(set) var clientName = UIDevice.current.name
+    #else
+    private(set) var clientName = "MacOS"
+    #endif
     
     init(serverUrl: URL!, token: String?, userId: String?) {
         self.serverUrl = serverUrl

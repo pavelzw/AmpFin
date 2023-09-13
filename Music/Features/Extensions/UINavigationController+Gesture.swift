@@ -5,6 +5,8 @@
 //  Created by Rasmus Krämer on 07.09.23.
 //
 
+#if canImport(UIKit)
+
 import Foundation
 import UIKit
 
@@ -18,3 +20,5 @@ extension UINavigationController: UIGestureRecognizerDelegate {
         return viewControllers.count > 1
     }
 }
+
+#endif

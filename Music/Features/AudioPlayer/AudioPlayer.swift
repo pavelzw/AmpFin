@@ -287,14 +287,17 @@ extension AudioPlayer {
         }
     }
     private func setupObservers() {
+        #if !os(macOS)
         NotificationCenter.default.addObserver(self, selector: #selector(handleItemDidPlayToEndTime), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption), name: AVAudioSession.interruptionNotification, object: AVAudioSession.sharedInstance())
+        #endif
     }
     
     @objc private func handleItemDidPlayToEndTime() {
         trackDidFinish()
     }
     @objc func handleInterruption(notification: Notification) {
+        #if !os(macOS)
         guard let userInfo = notification.userInfo, let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt, let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
             return
         }
@@ -310,6 +313,7 @@ extension AudioPlayer {
             }
         default: ()
         }
+        #endif
     }
 }
 
@@ -363,18 +367,22 @@ extension AudioPlayer {
     }
     
     private func setupAudioSession() {
+        #if !os(macOS)
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
         } catch {
             print(error, "failed to setup audio session")
         }
+        #endif
     }
     private func updateAudioSession(active: Bool) {
+        #if !os(macOS)
         do {
             try AVAudioSession.sharedInstance().setActive(active)
         } catch {
             print(error, "failed to update audio session")
         }
+        #endif
     }
 }
 
@@ -391,12 +399,14 @@ extension AudioPlayer {
                 
                 MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
                 
+                #if !os(macOS)
                 if let cover = nowPlaying.cover, let data = try? Data(contentsOf: cover.url), let image = UIImage(data: data) {
                     let artwork = MPMediaItemArtwork.init(boundsSize: image.size, requestHandler: { _ -> UIImage in image })
                     nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
                     
                     MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
                 }
+                #endif
             }
         }
     }

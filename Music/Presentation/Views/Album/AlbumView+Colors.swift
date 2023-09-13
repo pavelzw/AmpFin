@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension AlbumView {
+    #if canImport(UIKit)
     struct ImageColors {
         var background = Color(UIColor.secondarySystemBackground)
         var primary = Color.accentColor
@@ -33,4 +34,17 @@ extension AlbumView {
         
         return nil
     }
+    #else
+    struct ImageColors {
+        var background = Color(NSColor.secondarySystemFill)
+        var primary = Color.accentColor
+        var secondary = Color.secondary
+        var detail = Color.gray
+        var isLight = false
+    }
+    
+    func getImageColors() async -> ImageColors? {
+        return nil
+    }
+    #endif
 }

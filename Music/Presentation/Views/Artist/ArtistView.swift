@@ -25,6 +25,7 @@ struct ArtistView: View {
             }
         }
         .navigationTitle(artist.name)
+        #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -48,6 +49,7 @@ struct ArtistView: View {
                 Text("")
             }
         }
+        #endif
         .task(loadAlbums)
         .onChange(of: sortOrder) {
             Task {

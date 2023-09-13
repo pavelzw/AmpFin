@@ -21,7 +21,9 @@ extension AlbumView {
         
         func body(content: Content) -> some View {
             content
+            #if !os(macOS)
                 .toolbarBackground(navbarVisible ? .visible : .hidden, for: .navigationBar)
+            #endif
                 .navigationBarBackButtonHidden(!navbarVisible)
                 .toolbar {
                     ToolbarItem(placement: .principal) {

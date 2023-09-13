@@ -49,14 +49,18 @@ struct LoginView: View {
                     Section {
                         if loginFlowState == .server {
                             TextField("Server URL", text: $server)
-                                .keyboardType(.URL)
                                 .autocorrectionDisabled()
+                                #if !os(macOS)
+                                .keyboardType(.URL)
                                 .textInputAutocapitalization(.never)
+                                #endif
                         } else if loginFlowState == .credentials {
                             TextField("Username", text: $username)
                             SecureField("Password", text: $password)
                                 .autocorrectionDisabled()
+                            #if !os(macOS)
                                 .textInputAutocapitalization(.never)
+                            #endif
                         }
                         
                         Button {
@@ -76,6 +80,10 @@ struct LoginView: View {
                     }
                 }
                 .onSubmit(flowStep)
+                #if os(macOS)
+                .padding()
+                .frame(width: 300, height: 150)
+                #endif
             case .serverLoading, .credentialsLoading:
                 VStack {
                     ProgressView()
@@ -84,6 +92,9 @@ struct LoginView: View {
                         .foregroundStyle(.secondary)
                         .padding()
                 }
+                #if os(macOS)
+                .frame(width: 200, height: 200)
+                #endif
             }
         })
     }

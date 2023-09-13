@@ -8,6 +8,7 @@
 import SwiftUI
 import UIImageColors
 
+#if !os(macOS)
 struct NowPlayingSheet: View {
     @Environment(\.presentationMode) var presentationMode
     @Namespace var namespace
@@ -97,3 +98,4 @@ extension NowPlayingSheet {
             NowPlayingSheet(track: $0, playing: .constant(false))
         }
 }
+#endif

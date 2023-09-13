@@ -52,7 +52,9 @@ struct SearchView: View {
             // Query
             .searchable(text: $query, prompt: "Serach Tracks / Albums")
             .autocorrectionDisabled()
+            #if !os(macOS)
             .textInputAutocapitalization(.never)
+            #endif
             .onChange(of: query) {
                 task?.cancel()
                 task = Task.detached {

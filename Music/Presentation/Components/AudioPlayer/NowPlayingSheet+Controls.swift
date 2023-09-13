@@ -8,6 +8,7 @@
 import SwiftUI
 import AVKit
 
+#if !os(macOS)
 extension NowPlayingSheet {
     struct Controls: View {
         @Binding var playing: Bool
@@ -140,3 +141,4 @@ extension NowPlayingSheet {
         func updateUIView(_ uiView: UIView, context: Context) {}
     }
 }
+#endif

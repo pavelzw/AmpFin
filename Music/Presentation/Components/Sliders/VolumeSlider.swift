@@ -8,6 +8,7 @@
 import SwiftUI
 import MediaPlayer
 
+#if !os(macOS)
 struct VolumeSlider: View {
     @State var volume: Double = 0
     @State var isDragging: Bool = false
@@ -41,3 +42,4 @@ struct VolumeSlider: View {
         })
     }
 }
+#endif

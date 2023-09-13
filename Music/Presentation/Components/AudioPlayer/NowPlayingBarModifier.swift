@@ -14,6 +14,7 @@ struct NowPlayingBarModifier: ViewModifier {
     @State var nowPlayingSheetPresented = false
     
     func body(content: Content) -> some View {
+        #if !os(macOS)
         content
             .safeAreaInset(edge: .bottom) {
                 if let currentTrack = currentTrack {
@@ -83,6 +84,9 @@ struct NowPlayingBarModifier: ViewModifier {
                     playing = AudioPlayer.shared.isPlaying()
                 }
             })
+        #else
+        content
+        #endif
     }
 }
 

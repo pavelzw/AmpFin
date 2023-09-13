@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: Container
 
+#if !os(macOS)
 extension NowPlayingSheet {
     struct Queue: View {
         @State var histroy = AudioPlayer.shared.history
@@ -146,3 +147,4 @@ extension NowPlayingSheet {
         }
     }
 }
+#endif

@@ -22,7 +22,9 @@ struct AlbumView: View {
                 AudioPlayer.shared.startPlayback(tracks: tracks.sorted { $0.index < $1.index }, startIndex: 0, shuffle: shuffle)
             }
             .navigationTitle(album.name)
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             
             TrackList(tracks: tracks, album: album)
                 .padding(.top, 4)

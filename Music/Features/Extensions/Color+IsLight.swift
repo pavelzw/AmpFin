@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
 extension UIColor {
     func isLight(threshold: Float = 0.5) -> Bool {
         let originalCGColor = self.cgColor
@@ -19,3 +20,4 @@ extension UIColor {
         return (brightness > threshold)
     }
 }
+#endif

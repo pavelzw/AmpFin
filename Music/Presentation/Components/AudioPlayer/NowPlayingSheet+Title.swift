@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: Cover
 
+#if !os(macOS)
 extension NowPlayingSheet {
     struct Cover: View {
         let track: Track
@@ -109,3 +110,4 @@ extension NowPlayingSheet {
         }
     }
 }
+#endif

@@ -75,10 +75,13 @@ struct TrackListRow: View {
             } label: {
                 Image(systemName: "ellipsis")
                     .renderingMode(.original)
+                #if canImport(UIKit)
                     .foregroundStyle(Color(UIColor.label))
+                #endif
                     .padding(.vertical, 10)
                     .padding(.leading, 0)
             }
+            .buttonStyle(.plain)
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             PlayNextButton(track: track)
